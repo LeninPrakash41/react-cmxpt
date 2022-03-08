@@ -1,97 +1,196 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './style.css';
-import logoImg from './images/Logo.png'
+/*  
+Components - Aggregation of Components.
+1. header 
+2. Main body
+3. SideMenu (Optional)
+4. Footer
 
-import App from './App';
+Function - Functional Components (Presentational Components/Stateless Components)
+Class - Class-Based (Container Components / Statefull Components/ Smart Components)
 
-const headerStyles = {
-  color: '#000000',
-  backgroundColor: '#eeeeee',
-  padding: 20,
-  lineHeight: 1.5,
-  fontSize: 14,
-};
+JSX Element to Components
 
-const Institute = "Sathyabama"
-const Course = "ReactJS"
-const preReq = "JavaScript"
-const status = {
-  //Key or Name : "Value" => Object or JSON or Dictionary
-  tutor_name: "Lenin Prakash",
-  students_year: "III Year",
+Components in React are JavaScript functions or classes, then it will return a JSX.
+1. Name must start with Uppercase
+2. Name should be two words
+3. CamelCase
+
+Create Components:
+Header
+Footer
+Body - Multiple Components like User details, Description Section
+When we use different colors, each color represents different Components.
+
+Javascript Function
+
+- Regular or an Arrow Function
+
+const getUser = (fName, lName, place, age, skills) => {
+  return `${fName} ${lName} ${place} ${age} ${skills.join('.,-,_')}`
 }
-const date = 'Mar 07, 2022'
 
+const skills = ['HTML', 'CSS', 'JS', 'React']
+console.log(getUser('Lenin', 'Prakash', 'Chennai', 30, skills ))
+
+
+      class Parent{
+          constructor(fName, lName, place, age){
+              this.fName = fName
+              this.lName = lName
+              this.place = place
+              this.age = age
+          }
+
+          getUser(){
+              return `${this.fName} ${this.lName} ${this.place} ${this.age} `
+          }
+
+          parentMethod(){
+
+          }
+      }
+      
+      //Initiate Object Instance using new keyword
+
+      const par_obj = new Parent("Lenin", "Prakash", "Chennai", 30)
+      console.log(par_obj)
+
+      class Child extends Parent{
+          constructor(fName, lName, place, age, skills){
+            super(fName, lName, place, age)
+            this.skills = skills
+          }
+
+          getSkills() {
+              let len = this.skills.length
+              return len > 0 ? this.skills.join(',') : 'No Extra Skills ' // Conditional               
+          }
+
+          childMethod(){
+
+          }
+      }
+
+      //const skills = ["HTML", "CSS", "JS", "React"];
+
+      const child_obj = new Child("Lenin", "Prakash", "Chennai", 30, skills)
+      console.log(child_obj)
+
+      // React Component using Javascript Function
+const jsx = <tag>paragraph</tag>
+const ComponentName = () => {
+  return jsx
+}
+
+//JSX Header Element
 
 const header = (
   <header style={headerStyles}>
-    <h1>{Institute}</h1>
-    <h2>{Course}</h2>
-    <h3>{preReq}</h3>
-    <p>
-    status: {status.tutor_name} {status.students_year}
-    </p>
-
-    <small>Date: {date}</small>
+    <h1>Sathyabama</h1>
+    <h2>React</h2>
+    <h3>JavaScript</h3>
   </header>
 );
 
-//JSX Element Main Section
+// React Components
 
-const bodyStyles = {
-  backgroundColor: '#61DBDB',
+const Header = () => {
+  return header 
+}
+
+const Header = () => {
+  return (
+    <header style={headerStyles}>
+    <h1>Sathyabama</h1>
+    <h2>React</h2>
+    <h3>JavaScript</h3>
+    </header>
+  )
+}
+
+*/
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+// Header Components
+
+const Header = () => {
+  return (
+    <Header>
+      <h1>Sathyabama</h1>
+      <h2>React</h2>
+      <h3>JavaScript</h3>
+    </Header>
+  );
 };
 
-const main = (
-  <main style={bodyStyles}>
-    <p> How to Start</p>
-    <ul>
-      <li>HTML </li>
-      <li>CSS </li>
-      <li>JAVASCRIPT </li>
-      <li>REACT </li>
-    </ul>
-    <div>
-      <img src={logoImg} alt="Logo Image"/>
-      </div>
-  </main>
-);
+const logo = 'https://www.macincode.com/assets/img/logo.png';
 
-//JSX Element Footer Section
-
-const footerStyles = {
-  backgroundColor: '#61DBFB',
-};
-
-const footer = (
-  <footer styles={footerStyles}>
-    <p> Copyright @ 2022 </p>
-  </footer>
-);
-
-const app = (
-  <div className="app">
-    {header}
-    {main}
-    {footer}
+const User = () => (
+  <div className="user">
+    <img src={logo} alt="" />
+    <h2>Lenin Prakash</h2>
   </div>
 );
 
-/* const title =<h2>Start</h2>   
-const jsx = <h1>Sathyabama</h1> */
-//document.getElementsByClassName();
+// Details Components
+const Details = () => {
+  const tech = ['HTML', 'CSS', 'JS', 'REACT'];
+  const techSkills = tech.map((technologies) => (
+    <li key={technologies}> {technologies} </li>
+  ));
+  return techSkills;
+};
+
+//Body Components
+
+{
+  /* <ul>
+  <li>HTML</li>
+  <li>CSS</li>
+  <li>JS</li>
+  <li>JQ</li>
+  <li>REACT</li>
+</ul> */
+}
+
+const Body = () => {
+  return (
+    <Body>
+      <div className="body-wrapper">
+        <p> </p>
+        <ul>
+          <Details />
+        </ul>
+        <User />
+      </div>
+    </Body>
+  );
+};
+
+// Footer Components
+
+const Footer = () => {
+  return (
+    <Footer>
+      <div className="footer-wrapper">
+        <p> Copyright Algox Fusion</p>
+      </div>
+    </Footer>
+  );
+};
+
+const App = () => {
+  <div className="app">
+    <Header />
+    <Body />
+    <Footer />
+  </div>;
+};
 
 const rootElem = document.getElementById('root');
 
-// TO DIsplay some data (rendered data) in a browser should need some place. We have to paste or write the data. That sapce cannot be multiple. Instead, just write a root place (address), where we can render all the data written inside our react code.
+// we need to render the JSX Elements using ReactDOM package
 
-ReactDOM.render(app, rootElem);
-
-// We can add styles to our app eitehr using inline css, external css, internal.
-
-// Data Binding to JSX Elements
-// const variable_name = ""
-//{variable_name}
-
-1. 
+ReactDOM.render(<Header />, rootElem);

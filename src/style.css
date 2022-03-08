@@ -10,3 +10,7 @@ h1, p {
   color:green;
   font-size:40px;
 }
+
+.logo {
+  max-width: 300px;
+}
