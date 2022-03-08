@@ -92,6 +92,4 @@ ReactDOM.render(app, rootElem);
 
 // Data Binding to JSX Elements
 // const variable_name = ""
-//{variable_name}
-
-1;
+//{variable_name}  1;
