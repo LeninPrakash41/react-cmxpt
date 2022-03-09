@@ -110,87 +110,104 @@ const Header = () => {
 
 */
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-// Header Components
+const hexaColor = () => {
+  let str = "0123456789abcdef";
+  let color = "";
+  for (let i = 0; i < 6; i++) {
+    let index = Math.floor(Math.random() * str.length);
+    color += str[index];
+  }
+  return "#" + color;
+};
 
-const Header = () => {
+const HexaColor = () => {
+  const bgColor = hexaColor();
+  const styles = {
+    height: "100px",
+    display: "flex",
+    "justify-content": "center",
+    "align-items": "center",
+    fontFamily: "Montserrat",
+    margin: "2px auto",
+    borderRadius: "5px",
+    width: "75%",
+    border: "2px solid black"
+  };
   return (
-    <Header>
-      <h1>Sathyabama</h1>
-      <h2>React</h2>
-      <h3>JavaScript</h3>
-    </Header>
+    <div style={styles}>
+      <h2>{bgColor}</h2>
+    </div>
   );
 };
 
-const logo = 'https://www.macincode.com/assets/img/logo.png';
+// Header Component
+const Header = () => (
+  <header>
+    <div className="header-wrapper">
+      <h1>Welcome Sathyabama</h1>
+      <h2>Course Name: React</h2>
+      <h3>Pre-Requisite: JavaScript</h3>
+      <p>Lenin</p>
+      <small>March 3, 2022</small>
+    </div>
+  </header>
+);
 
-const User = () => (
-  <div className="user">
-    <img src={logo} alt="" />
-    <h2>Lenin Prakash</h2>
+// User Card Component
+const UserCard = () => (
+  <div className="user-card">
+    <h2>Lenin</h2>
   </div>
 );
 
-// Details Components
-const Details = () => {
-  const tech = ['HTML', 'CSS', 'JS', 'REACT'];
-  const techSkills = tech.map((technologies) => (
-    <li key={technologies}> {technologies} </li>
+// TechList Component
+const TechList = () => {
+  const technologies = ["HTML", "CSS", "JavaScript"];
+  const technologiesMapped = technologies.map((tech) => (
+    <li key={tech}>{tech}</li>
   ));
-  return techSkills;
+  return technologiesMapped;
 };
 
-//Body Components
-
-{
-  /* <ul>
-  <li>HTML</li>
-  <li>CSS</li>
-  <li>JS</li>
-  <li>JQ</li>
-  <li>REACT</li>
-</ul> */
-}
-
-const Body = () => {
-  return (
-    <Body>
-      <div className="body-wrapper">
-        <p> </p>
-        <ul>
-          <Details />
-        </ul>
-        <User />
+// Main Component
+const Main = () => (
+  <main>
+    <div className="main-wrapper">
+      <p>Prerequisite to get started react.js:</p>
+      <ul>
+        <TechList />
+      </ul>
+      <UserCard />
+      <div>
+        {/* Generate two different hexa colors every time */}
+        <HexaColor />
+        <HexaColor />
       </div>
-    </Body>
-  );
-};
+    </div>
+  </main>
+);
 
-// Footer Components
+// Footer Component
+const Footer = () => (
+  <footer>
+    <div className="footer-wrapper">
+      <p>Copyright 2020</p>
+    </div>
+  </footer>
+);
 
-const Footer = () => {
-  return (
-    <Footer>
-      <div className="footer-wrapper">
-        <p> Copyright Algox Fusion</p>
-      </div>
-    </Footer>
-  );
-};
-
-const App = () => {
+// The App, or the parent or the container component
+const App = () => (
   <div className="app">
     <Header />
-    <Body />
+    <Main />
     <Footer />
-  </div>;
-};
+  </div>
+);
 
-const rootElem = document.getElementById('root');
-
-// we need to render the JSX Elements using ReactDOM package
-
-ReactDOM.render(<Header />, rootElem);
+const rootElement = document.getElementById("root");
+// we render the App component using the ReactDOM package
+ReactDOM.render(<App />, rootElement);
